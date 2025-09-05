@@ -115,7 +115,7 @@ class DbTasks:
         
     def RemakeFile(self, name, data):
 
-        with open(fr"C:\Users\IRUIZ1\Documents\Incidents\{name}\check_list.xlsx", "wb") as file:
+        with open(fr"C:\Users\IRUIZ1\Documents\Tasks\{name}\check_list.xlsx", "wb") as file:
             file.write(data)
 
     def InsertCheckList(self, CheckList):
