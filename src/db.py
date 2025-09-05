@@ -1,6 +1,6 @@
 import sqlite3 as sql
 from pathlib import Path
-
+import os
 
 class DbIncidents:
     def __init__(self) -> None:
@@ -39,6 +39,12 @@ class DbIncidents:
     def ReadFile(self, path):
         with open(path, "rb") as file:
             return file.read()
+        
+    def RemakeFile(self, name, data):
+
+        with open(fr"C:\Users\IRUIZ1\Documents\Incidents\{name}\check_list.xlsx", "wb") as file:
+            file.write(data)
+        
 
     def InsertCheckList(self, CheckList):
         self.OpenConnection()
@@ -49,6 +55,23 @@ class DbIncidents:
         self.connection.commit()
 
         self.CloseConnection()
+
+    def SelectUser(self):
+        self.OpenConnection()
+
+        self.cursor.execute(f"SELECT name, check_list FROM {self.TABLE_NAME}")
+        name, data = self.cursor.fetchall()
+
+        self.RemakeFile(name, data)
+
+        self.connection.close()
+
+
+
+        
+        
+
+
             
         
 
@@ -89,6 +112,11 @@ class DbTasks:
     def ReadFile(self, path):
         with open(path, "rb") as file:
             return file.read()
+        
+    def RemakeFile(self, name, data):
+
+        with open(fr"C:\Users\IRUIZ1\Documents\Incidents\{name}\check_list.xlsx", "wb") as file:
+            file.write(data)
 
     def InsertCheckList(self, CheckList):
         self.OpenConnection()
@@ -99,6 +127,16 @@ class DbTasks:
         self.connection.commit()
 
         self.CloseConnection()
+
+    def SelectUser(self):
+        self.OpenConnection()
+
+        self.cursor.execute(f"SELECT name, check_list FROM {self.TABLE_NAME}")
+        name, data = self.cursor.fetchall()
+
+        self.RemakeFile(name, data)
+
+        self.connection.close()
 
     
 
